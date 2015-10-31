@@ -13,7 +13,7 @@ Instalasi :
 
 - buat database baru, terus import database yang ada pada folder db 
 
-- setting config database, dengan mengisi nama database, username db dan password yang sesuai. misal nama db: "db_store", username: "root", password: "root".
+- setting file config database.php pada folder application/config/database.php, dengan mengisi nama database, username db dan password yang sesuai. misal nama db: "db_store", username: "root", password: "root".
 
 ```
 $db['default'] = array(
