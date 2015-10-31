@@ -25,6 +25,23 @@ class Perangkat_model extends CI_Model {
 		return false;
 	}
 
+
+	/**
+	 * Get All Record by type from table
+	 * @return Object
+	 */
+	public function get_all_by_type($type)
+	{
+		$result = $this->db->get_where($this->_table, array('type' => $type));
+
+		if($result->num_rows() > 0)
+		{
+			return $result->result();
+		}
+
+		return false;
+	}
+
 	/**
 	 * Get One Record by condition
 	 * @param  Array $condition "example : array('id' => 1)"

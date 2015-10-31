@@ -38,7 +38,8 @@ class Perangkat extends CI_Controller {
 	 */
 	public function index()
 	{
-		$data['models'] = $this->perangkat_model->get_all();
+		$data['models_laptop'] = $this->perangkat_model->get_all_by_type("laptop");
+		$data['models_komputer'] = $this->perangkat_model->get_all_by_type("komputer");
 
 		$this->template->set_navbar('templates/navbar');
 		$this->template->load('main', 'perangkat/index', $data);
