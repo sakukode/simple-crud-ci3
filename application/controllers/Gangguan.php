@@ -18,6 +18,23 @@ class Gangguan extends CI_Controller {
 	}
 	
 	/**
+	 * get doc values from input form
+	 * @return [type] [description]
+	 */
+	public function _get_doc()
+	{
+		$data = array(
+			'deskripsi_gangguan' => $this->input->post('deskripsi_gangguan'),
+			'rencana_tindakan' => $this->input->post('rencana_tindakan'),
+			'eksekusi' => $this->input->post('eksekusi'),
+			'keterangan' => $this->input->post('keterangan'),
+			'id_perangkat' => $this->input->post('id_perangkat'),
+		);
+
+		return $data;
+	}
+
+	/**
 	 * Load Page Index
 	 * @return [type] [description]
 	 */
@@ -51,13 +68,8 @@ class Gangguan extends CI_Controller {
 		else 
 		{
 			//if success
-			$data = array(
-				'deskripsi_gangguan' => $this->input->post('deskripsi_gangguan'),
-				'rencana_tindakan' => $this->input->post('rencana_tindakan'),
-				'eksekusi' => $this->input->post('eksekusi'),
-				'keterangan' => $this->input->post('keterangan'),
-				'id_perangkat' => $this->input->post('id_perangkat'),
-			);
+			//get values from input form
+			$data = $this->_get_doc();
 
 			//call method 'create' on gangguan model to insert record into table
 			$res = $this->gangguan_model->create($data);
@@ -109,13 +121,8 @@ class Gangguan extends CI_Controller {
 			{
 				//if success
 				//prepare data
-				$data = array(
-					'deskripsi_gangguan' => $this->input->post('deskripsi_gangguan'),
-					'rencana_tindakan' => $this->input->post('rencana_tindakan'),
-					'eksekusi' => $this->input->post('eksekusi'),
-					'keterangan' => $this->input->post('keterangan'),
-					'id_perangkat' => $this->input->post('id_perangkat'),
-				);
+				//get values from input form
+				$data = $this->_get_doc();
 
 				//call method 'create' on gangguan model to insert record into table
 				$res = $this->gangguan_model->update($condition, $data);

@@ -16,6 +16,21 @@ class Komponen extends CI_Controller {
 		//check authentication
 		$this->auth();
 	}
+
+	/**
+	 * get doc values from input form
+	 * @return [type] [description]
+	 */
+	public function _get_doc()
+	{
+		$data = array(
+			'name' => $this->input->post('name'),
+			'spec' => $this->input->post('spec'),
+			'id_perangkat' => $this->input->post('id_perangkat'),
+		);
+
+		return $data;
+	}
 	
 	/**
 	 * Load Page Index
@@ -51,11 +66,8 @@ class Komponen extends CI_Controller {
 		else 
 		{
 			//if success
-			$data = array(
-				'name' => $this->input->post('name'),
-				'spec' => $this->input->post('spec'),
-				'id_perangkat' => $this->input->post('id_perangkat'),
-			);
+			//get values from input form
+			$data = $this->_get_doc();
 
 			//call method 'create' on komponen model to insert record into table
 			$res = $this->komponen_model->create($data);
@@ -107,11 +119,8 @@ class Komponen extends CI_Controller {
 			{
 				//if success
 				//prepare data
-				$data = array(
-					'name' => $this->input->post('name'),
-					'spec' => $this->input->post('spec'),
-					'id_perangkat' => $this->input->post('id_perangkat'),
-				);
+				//get values from input form
+				$data = $this->_get_doc();
 
 				//call method 'create' on komponen model to insert record into table
 				$res = $this->komponen_model->update($condition, $data);

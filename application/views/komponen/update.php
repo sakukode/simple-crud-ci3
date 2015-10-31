@@ -32,7 +32,7 @@
       </div>
       <div class="form-group">
         <label for="type">Spec *</label>
-        <input type="text" class="form-control" id="type" name="type" placeholder="Spec *" value="<?php echo $model->spec;?>">
+        <input type="text" class="form-control" id="type" name="spec" placeholder="Spec *" value="<?php echo $model->spec;?>">
       </div>
       <div class="form-group">
         <label for="status">Perangkat </label>

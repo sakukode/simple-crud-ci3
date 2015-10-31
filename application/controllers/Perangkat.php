@@ -17,6 +17,10 @@ class Perangkat extends CI_Controller {
 		$this->auth();
 	}
 
+	/**
+	 * get doc values from input form
+	 * @return [type] [description]
+	 */
 	public function _get_doc()
 	{
 		$data = array(

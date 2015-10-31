@@ -8,12 +8,22 @@
   </div>
 </div>
 <div class="row">
-  <div class="col-md-12">
-    <?php echo $this->session->flashdata('message_success'); ?>  
+ <div class="col-md-12">
+    <?php if($this->session->flashdata('message_success')): ?>
+    <div class="alert alert-success"> 
+      <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+      <?php echo $this->session->flashdata('message_success'); ?> 
+    </div>
+    <?php endif; ?>  
   </div>
 
   <div class="col-md-12">
-    <?php echo $this->session->flashdata('message_danger'); ?>  
+    <?php if($this->session->flashdata('message_danger')): ?>
+    <div class="alert alert-danger"> 
+      <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+      <?php echo $this->session->flashdata('message_danger'); ?> 
+    </div>
+    <?php endif; ?>  
   </div>
   
   <div class="col-md-12">
