@@ -23,11 +23,25 @@ class Depan extends CI_Controller {
 
 		$models = array();
 		
+		$chartLaptop = $this->getChart("laptop");
+		$chartKomputer = $this->getChart("komputer");
+
+		//parsing data to view
+		$data['laptop'] = $chartLaptop ? $chartLaptop : null;
+		$data['komputer'] = $chartKomputer ? $chartKomputer : null;
+
+		//load template and view page
+		$this->template->set_navbar('templates/navbar');
+		$this->template->load('main', 'depan/index', $data);
+	}
+
+	public function getChart($type)
+	{
 		//get total perangkat by status
-		$totalBaik = $this->perangkat_model->get_total("status", "Baik");
-		$totalRusakRingan = $this->perangkat_model->get_total("status", "Rusak Ringan");
-		$totalRusakBerat = $this->perangkat_model->get_total("status", "Rusak Berat");
-		$totalMatiToal = $this->perangkat_model->get_total("status", "Mati Total");
+		$totalBaik = $this->perangkat_model->get_total($type, "status", "Baik");
+		$totalRusakRingan = $this->perangkat_model->get_total($type, "status", "Rusak Ringan");
+		$totalRusakBerat = $this->perangkat_model->get_total($type, "status", "Rusak Berat");
+		$totalMatiToal = $this->perangkat_model->get_total($type, "status", "Mati Total");
 
 		//populate data to json for used created chart
 		$models[] = array('name' => "Baik", 'y'=> $totalBaik);
@@ -36,12 +50,7 @@ class Depan extends CI_Controller {
 		$models[] = array('name' => "Mati Total", 'y'=> $totalMatiToal);
 		$modeljson = json_encode($models);
 
-		//parsing data to view
-		$data['models'] = $modeljson ? $modeljson : null;
-
-		//load template and view page
-		$this->template->set_navbar('templates/navbar');
-		$this->template->load('main', 'depan/index', $data);
+		return $modeljson;
 	}
 
 

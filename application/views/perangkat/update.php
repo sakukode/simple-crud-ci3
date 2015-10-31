@@ -39,7 +39,10 @@
       </div>
       <div class="form-group">
         <label for="type">Type *</label>
-        <input type="text" class="form-control" id="type" name="type" placeholder="Type *" value="<?php echo $model->type; ?>">
+        <select class="form-control" name="type">
+          <option value="laptop" <?php echo selected_combobox('laptop', $model->status);?>>Laptop</option>
+          <option value="komputer" <?php echo selected_combobox('komputer', $model->status);?>>Komputer</option>
+        </select>
       </div>
       <div class="form-group">
         <label for="status">Status </label>

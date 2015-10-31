@@ -48,8 +48,9 @@ class Perangkat_model extends CI_Model {
 	 * @param  [type] $value [description]
 	 * @return [type]        [description]
 	 */
-	public function get_total($field, $value)
+	public function get_total($type, $field, $value)
 	{
+		$this->db->where('type', $type);
 		$this->db->where($field, $value);
 		$this->db->from($this->_table);
 		return $this->db->count_all_results();

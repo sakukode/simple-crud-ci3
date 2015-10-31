@@ -38,7 +38,10 @@
       </div>
       <div class="form-group">
         <label for="type">Type *</label>
-        <input type="text" class="form-control" id="type" name="type" placeholder="Type *">
+        <select class="form-control" name="type">
+          <option value="laptop" >Laptop</option>
+          <option value="komputer" >Komputer</option>
+        </select>
       </div>
       <div class="form-group">
         <label for="status">Status </label>

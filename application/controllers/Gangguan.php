@@ -11,7 +11,7 @@ class Gangguan extends CI_Controller {
 		parent::__construct();
 		$this->load->library('template');
 		$this->load->model(array('gangguan_model','perangkat_model'));
-		$this->output->enable_profiler(true);
+		//$this->output->enable_profiler(true);
 
 		//check authentication
 		$this->auth();

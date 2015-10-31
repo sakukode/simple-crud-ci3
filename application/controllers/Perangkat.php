@@ -11,10 +11,21 @@ class Perangkat extends CI_Controller {
 		parent::__construct();
 		$this->load->library('template');
 		$this->load->model('perangkat_model');
-		$this->output->enable_profiler(true);
+		//$this->output->enable_profiler(true);
 
 		//check authentication
 		$this->auth();
+	}
+
+	public function _get_doc()
+	{
+		$data = array(
+			'name' => $this->input->post('name'),
+			'type' => $this->input->post('type'),
+			'status' => $this->input->post('status'),
+		);
+
+		return $data;
 	}
 	
 	/**
@@ -55,13 +66,10 @@ class Perangkat extends CI_Controller {
 			if ($_FILES['picture']['error'] == 4)
 			{
 			    // picture is empty (and not an error)
-				$data = array(
-					'name' => $this->input->post('name'),
-					'type' => $this->input->post('type'),
-					'status' => $this->input->post('status'),
-					);
+			    // get values from input form
+				$data = $this->_get_doc();
 
-					//call method 'create' on perangkat model to insert record into table
+				//call method 'create' on perangkat model to insert record into table
 				$res = $this->perangkat_model->create($data);
 
 				if($res) {
@@ -85,12 +93,9 @@ class Perangkat extends CI_Controller {
 				} else {
 					$file = $result['data'];
 					//if success
-					$data = array(
-						'name' => $this->input->post('name'),
-						'type' => $this->input->post('type'),
-						'status' => $this->input->post('status'),
-						'picture' => $file['file_name']
-					);
+					//get values input form
+					$data = $this->_get_doc();
+					$data['picture'] = $file['file_name'];
 
 					//call method 'create' on perangkat model to insert record into table
 					$res = $this->perangkat_model->create($data);
@@ -147,11 +152,8 @@ class Perangkat extends CI_Controller {
 				{
 				    // picture is empty (and not an error)
 					//prepare data
-					$data = array(
-						'name' => $this->input->post('name'),
-						'type' => $this->input->post('type'),
-						'status' => $this->input->post('status'),
-					);
+					//get values input form
+					$data = $this->_get_doc();
 
 					//call method 'create' on perangkat model to update record into table
 					$res = $this->perangkat_model->update($condition, $data);
@@ -178,12 +180,9 @@ class Perangkat extends CI_Controller {
 					} else {
 						$file = $result['data'];
 						//if success
-						$data = array(
-							'name' => $this->input->post('name'),
-							'type' => $this->input->post('type'),
-							'status' => $this->input->post('status'),
-							'picture' => $file['file_name']
-						);
+						//get values input form
+						$data = $this->_get_doc();
+						$data['picture'] = $file['file_name'];
 
 						//call method 'create' on perangkat model to update record into table
 						$res = $this->perangkat_model->update($condition, $data);
