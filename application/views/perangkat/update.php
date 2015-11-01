@@ -42,6 +42,7 @@
         <select class="form-control" name="type">
           <option value="laptop" <?php echo selected_combobox('laptop', $model->status);?>>Laptop</option>
           <option value="komputer" <?php echo selected_combobox('komputer', $model->status);?>>Komputer</option>
+          <option value="laptop" <?php echo selected_combobox('tinkpad', $model->status);?>>Tinkpad</option>
         </select>
       </div>
       <div class="form-group">

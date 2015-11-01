@@ -41,6 +41,7 @@
         <select class="form-control" name="type">
           <option value="laptop" >Laptop</option>
           <option value="komputer" >Komputer</option>
+          <option value="tinkpad">Tinkpad</option>
         </select>
       </div>
       <div class="form-group">

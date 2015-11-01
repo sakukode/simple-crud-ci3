@@ -11,6 +11,7 @@ class Perangkat extends CI_Controller {
 		parent::__construct();
 		$this->load->library('template');
 		$this->load->model('perangkat_model');
+		$this->load->helper('validation');
 		//$this->output->enable_profiler(true);
 
 		//check authentication
@@ -38,8 +39,10 @@ class Perangkat extends CI_Controller {
 	 */
 	public function index()
 	{
-		$data['models_laptop'] = $this->perangkat_model->get_all_by_type("laptop");
-		$data['models_komputer'] = $this->perangkat_model->get_all_by_type("komputer");
+		$type = $this->input->get('type') ? $this->input->get('type') : null;
+
+		$data['type'] = $type;
+		$data['models'] = $type ? $this->perangkat_model->get_all_by_type($type) : null;
 
 		$this->template->set_navbar('templates/navbar');
 		$this->template->load('main', 'perangkat/index', $data);
