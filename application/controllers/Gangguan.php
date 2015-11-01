@@ -50,7 +50,7 @@ class Gangguan extends CI_Controller {
 	 * Load Page Insert
 	 * @return [type] [description]
 	 */
-	public function insert()
+	public function insert($id_perangkat)
 	{
 		//set navbar
 		$this->template->set_navbar('templates/navbar');
@@ -58,7 +58,7 @@ class Gangguan extends CI_Controller {
 		//set rules form validation
 		$this->_set_validation();
 		//get perangkat list
-		$data['perangkat'] = $this->perangkat_model->get_all();
+		$data['perangkat'] = $this->perangkat_model->get_one(array('id'=> $id_perangkat));
 
 		if($this->form_validation->run() == FALSE)
 		{
@@ -82,7 +82,7 @@ class Gangguan extends CI_Controller {
 				$this->session->set_flashdata('message_danger', "Failed inserting data");	
 			}
 
-			redirect('gangguan');
+			redirect('perangkat/view/'.$id_perangkat);
 			
 		}
 	}
@@ -91,9 +91,9 @@ class Gangguan extends CI_Controller {
 	 * Load Page Update
 	 * @return [type] [description]
 	 */
-	public function update($id)
+	public function update($id_perangkat, $id)
 	{
-		if($id) {
+		if($id && $id_perangkat) {
 			//load helper validation to set form
 			$this->load->helper('validation');
 
@@ -103,7 +103,7 @@ class Gangguan extends CI_Controller {
 			//get a record by id
 			$data['model'] = $this->gangguan_model->get_one($condition);
 			//get perangkat list
-			$data['perangkat'] = $this->perangkat_model->get_all();
+			$data['perangkat'] = $this->perangkat_model->get_one(array('id'=>$id_perangkat));
 
 			//set navbar in template
 			$this->template->set_navbar('templates/navbar');
@@ -135,12 +135,12 @@ class Gangguan extends CI_Controller {
 					$this->session->set_flashdata('message_danger', "Failed updating data");	
 				}
 
-				redirect('gangguan');
+				redirect('perangkat/view/'.$id_perangkat);
 				
 			}	
 		} else {
 			$this->session->set_flashdata('message_danger', "System Error");
-			redirect('gangguan');
+			redirect('perangkat');
 		}
 	}
 
@@ -148,9 +148,9 @@ class Gangguan extends CI_Controller {
 	 * Load Page View
 	 * @return [type] [description]
 	 */
-	public function view($id)
+	public function view($id_perangkat, $id)
 	{
-		if($id) {
+		if($id && $id_perangkat) {
 			$condition = array('gangguan.id'=> $id);
 			$data['model'] = $this->gangguan_model->get_one($condition);
 
@@ -158,7 +158,7 @@ class Gangguan extends CI_Controller {
 			$this->template->load('main', 'gangguan/view', $data);		
 		} else {
 			$this->session->set_flashdata('message_danger', "System Error");
-			redirect('gangguan');
+			redirect('perangkat');
 		}
 		
 	}	
@@ -167,20 +167,23 @@ class Gangguan extends CI_Controller {
 	 * Action to Delete Record
 	 * @return [type] [description]
 	 */
-	public function delete($id)
+	public function delete($id_perangkat, $id)
 	{
-		if($id) {
+		if($id && $id_perangkat) {
 			$condition = array('id' => $id);
 
 			$res = $this->gangguan_model->delete($condition);
 			
 			if($res)
-				$this->session->set_flashdata('message_success', "Successfully deleting data");			
+				$this->session->set_flashdata('message_success', "Successfully deleting data");
+
+			redirect('perangkat/view/'.$id_perangkat);
+		} else {
+			$this->session->set_flashdata('message_danger', "System Error");
+
+			redirect('perangkat');
 		}
 
-		$this->session->set_flashdata('message_danger', "System Error");
-
-		redirect('gangguan');
 	}
 
 	/**

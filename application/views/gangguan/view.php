@@ -9,10 +9,10 @@
 </div>
 <div class="row">
   <div class="col-md-12">
-    <a href="<?php echo site_url('gangguan');?>" class="btn btn-primary">Back</a>
+    <a href="<?php echo site_url('perangkat/view/'.$model->id_perangkat);?>" class="btn btn-primary">Back</a>
     <?php if($model): ?>
-    <a href="<?php echo site_url('gangguan/update/'.$model->id);?>" class="btn btn-primary">Update</a>
-    <a href="<?php echo site_url('gangguan/delete/'.$model->id);?>" onclick="return confirm('Are you sure want delete this data?')" class="btn btn-danger">Delete</a>
+    <a href="<?php echo site_url('gangguan/update/'.$model->id_perangkat.'/'.$model->id);?>" class="btn btn-primary">Update</a>
+    <a href="<?php echo site_url('gangguan/delete/'.$model->id_perangkat.'/'.$model->id);?>" onclick="return confirm('Are you sure want delete this data?')" class="btn btn-danger">Delete</a>
     <?php endif; ?>
   </div>
 </div>

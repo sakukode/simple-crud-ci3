@@ -14,8 +14,6 @@
         <li><a href="<?php echo site_url();?>">Depan</a></li>
         <?php if($this->session->userdata('level') == "admin"): ?>
         <li><a href="<?php echo site_url('perangkat');?>">Perangkat</a></li>
-        <li><a href="<?php echo site_url('komponen');?>">Komponen</a></li>
-        <li><a href="<?php echo site_url('gangguan');?>">Gangguan</a></li>
         <?php endif; ?>
       </ul>
       <ul class="nav navbar-nav navbar-right">

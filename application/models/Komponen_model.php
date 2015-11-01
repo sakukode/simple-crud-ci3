@@ -29,12 +29,24 @@ class Komponen_model extends CI_Model {
 	 * Get All Record from table
 	 * @return Object
 	 */
-	public function get_all_with_relation()
+	public function get_all_with_relation($id_perangkat =null)
 	{
-		$this->db->select('komponen.*, perangkat.name as perangkat_name');
-		$this->db->from($this->_table);
-		$this->db->join('perangkat', 'perangkat.id = komponen.id_perangkat');
-		$result = $this->db->get();
+		if($id_perangkat) 
+		{
+			$this->db->select('komponen.*, perangkat.name as perangkat_name');
+			$this->db->from($this->_table);
+			$this->db->where('id_perangkat', $id_perangkat);
+			$this->db->join('perangkat', 'perangkat.id = komponen.id_perangkat');
+			$result = $this->db->get();
+		} else 
+		{
+			$this->db->select('komponen.*, perangkat.name as perangkat_name');
+			$this->db->from($this->_table);
+			$this->db->join('perangkat', 'perangkat.id = komponen.id_perangkat');
+			$result = $this->db->get();	
+		}
+		
+		
 
 		if($result->num_rows() > 0)
 		{

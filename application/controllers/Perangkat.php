@@ -217,9 +217,14 @@ class Perangkat extends CI_Controller {
 	 */
 	public function view($id)
 	{
+		$this->load->model('komponen_model');
+		$this->load->model('gangguan_model');
+
 		if($id) {
 			$condition = array('id'=> $id);
 			$data['model'] = $this->perangkat_model->get_one($condition);
+			$data['komponen']= $this->komponen_model->get_all_with_relation($id);
+			$data['gangguan'] = $this->gangguan_model->get_all_with_relation($id);
 
 			$this->template->set_navbar('templates/navbar');
 			$this->template->load('main', 'perangkat/view', $data);		
